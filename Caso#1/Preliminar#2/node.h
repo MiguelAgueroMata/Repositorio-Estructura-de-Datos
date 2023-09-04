@@ -1,13 +1,18 @@
 #ifndef NODE_H
 #define NODE_H
-#include <iostream>
 #include <string>
 
 using namespace std;
 
-class node {
+class node 
+{
 	public:
-		node(string newsTitle);
+		node(string newsTitle)
+		{
+		newsTitle = newsTitle;
+		siguiente = NULL;
+		anterior = NULL;
+		}
 
 
 	private:
