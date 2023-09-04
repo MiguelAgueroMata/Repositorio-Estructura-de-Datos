@@ -370,3 +370,8 @@ void linkedList::printTopFive()
         cout << endl;
     }
 }
+
+void linkedList::relocate(string newsTitle, int movement)
+{
+    
+}

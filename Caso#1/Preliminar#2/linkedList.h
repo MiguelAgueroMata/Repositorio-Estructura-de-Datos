@@ -29,6 +29,8 @@ class linkedList
         void print();
 		void printTopFive();
 
+        void relocate(string newsTitle, int movement);
+
 	private:
 		nodeList primero;
 		nodeList actual;
