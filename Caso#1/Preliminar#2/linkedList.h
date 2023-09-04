@@ -11,7 +11,7 @@ class linkedList
 	public:
 		linkedList();
 
-        bool isEmpty();
+        bool isEmpty() { return primero == NULL; }
         int listLength();
 
         void addToStart(string newsTitle);
@@ -22,6 +22,7 @@ class linkedList
         node* findByPosition(int position);
         int findPositionOf(string newsTitle);
 
+        void deleteLast();
         void deleteByTitle(string newsTitle);
         void deleteByPosition(int position);
 

@@ -5,11 +5,6 @@ linkedList::linkedList()
     primero = actual = NULL;
 }
 
-bool linkedList::isEmpty()
-{
-    return primero = NULL;
-}
-
 int linkedList::listLength()
 {
     int cont = 0;
@@ -32,21 +27,21 @@ int linkedList::listLength()
     return cont;
 }
 
-void linkedList::addToEnd(string newsTitle)
+void linkedList::addToEnd(string nTitle)
 {
     if(isEmpty())
     {
-        primero = new node(newsTitle);
+        primero = new node(nTitle);
         primero->anterior = NULL;
     }
     else
     {
-        nodeList aux;
-        while(aux->siguiente = NULL)
+        nodeList aux = primero;
+        while(aux->siguiente != NULL)
         {
             aux = aux->siguiente;
         }
-        aux->siguiente = new node(newsTitle);
+        aux->siguiente = new node(nTitle);
         aux->siguiente->anterior = aux;
     }
 }
@@ -76,25 +71,33 @@ void linkedList::insert(string newsTitle, int pos)
     }
     else
     {
-        if(pos <=1)
+        if(pos > listLength())
         {
-            addToStart(newsTitle);
+            cout << "Posicion deseada de insercion mayor al largo de lista, se inserta al final" << endl;
+            addToEnd(newsTitle);
         }
         else
         {
-            nodeList aux = primero;
-            int posActual = 1;
-            while(aux->siguiente != NULL && posActual < pos-1)
+            if(pos <=1)
             {
-                aux = aux->siguiente;
-                posActual++;
+                addToStart(newsTitle);
             }
-            nodeList nuevo = new node(newsTitle);
-            nuevo->siguiente = aux->siguiente;
-            nuevo->anterior = aux;
-            aux->siguiente = nuevo;
-            nuevo->siguiente->anterior = nuevo;
+            else
+            {
+                nodeList aux = primero;
+                int posActual = 1;
+                while(aux->siguiente != NULL && posActual < pos-1)
+                {
+                    aux = aux->siguiente;
+                    posActual++;
+                }
+                nodeList nuevo = new node(newsTitle);
+                nuevo->siguiente = aux->siguiente;
+                nuevo->anterior = aux;
+                aux->siguiente = nuevo;
+                nuevo->siguiente->anterior = nuevo;
 
+            }
         }
     }
 }
@@ -109,16 +112,17 @@ node* linkedList::findByWord(string newsTitle)
     else
     {
         nodeList actual = primero;
-
+        int cont = 1;
         while (actual != NULL)
         {
             if(actual->newsTitle == newsTitle)
             {
-                cout << "Titulo:  " << actual->newsTitle << endl;
+                cout << "Headline encontrado en la posicion " << cont << ": \nTitulo:  " << actual->newsTitle << endl << endl;
                 return actual;
             }
             else
                 actual = actual->siguiente;
+                cont++;
         }
     }
     cout << "No match." << endl;
@@ -143,7 +147,7 @@ node* linkedList::findByPosition(int position)
         {
             if(position <=1)
             {
-                cout << "Titulo: " << primero->newsTitle << endl;
+                cout << "Headline encontrado en la posicion " << position << ": \nTitulo:  " << primero->newsTitle << endl << endl;
                 return primero;
             }
             else
@@ -155,7 +159,7 @@ node* linkedList::findByPosition(int position)
                     aux = aux->siguiente;
                     posActual++;
                 }
-                cout << "Titulo: " << aux->newsTitle << endl;
+                cout << "Headline encontrado en la posicion " << posActual << ": \nTitulo:  " << aux->newsTitle << endl << endl;
                 return aux;
             }
 
@@ -182,7 +186,7 @@ int linkedList::findPositionOf(string newsTitle)
         {
             if(aux->newsTitle == newsTitle)
             {
-                cout << "Titulo: " << aux->newsTitle << endl;
+                cout << "Headline encontrado en la posicion " << cont << ": \nTitulo:  " << aux->newsTitle << endl << endl;
                 return cont;
             }
             else
@@ -197,53 +201,108 @@ int linkedList::findPositionOf(string newsTitle)
     return 0;
 }
 
+void linkedList::deleteLast()
+{
+    if(isEmpty())
+    {
+        cout << "Lista vacia." << endl << endl;
+    }
+    else
+    {
+        if(primero->siguiente == NULL)
+        {
+            nodeList temp = primero;
+            primero = NULL;
+            delete temp;
+        }
+        else
+        {
+            nodeList aux = primero;
+            while(aux->siguiente->siguiente != NULL)
+            {
+                aux = aux->siguiente;
+            }
+
+            nodeList temp = aux->siguiente;
+            aux->siguiente = NULL;
+            delete temp;
+        }
+    }
+}
 void linkedList::deleteByTitle(string newsTitle)
 {
     if (isEmpty())
     {
-        cout << "La lista se encuentra vacia." << endl;
+        cout << "La lista se encuentra vacia." << endl << endl;
     }
     else
     {
         nodeList actual = primero;
 
-        while (actual!= NULL)
+        while (actual != NULL)
         {
-            if(actual->newsTitle == newsTitle && actual->siguiente != NULL)
+            if (actual == primero && actual->newsTitle == newsTitle)
             {
-                cout << "Titulo:  " << actual->newsTitle << endl;
-                cout << "Eliminado de la lista." << endl;
-                actual->siguiente->anterior = actual->anterior;
-                actual->anterior->siguiente = actual->siguiente;
-                
+                cout << "--------------------------------------" << endl;
+                cout << "Titulo: " << actual->newsTitle << endl;
+                cout << "Eliminado." << endl << endl;
+                nodeList temp = primero;
+                primero = primero->siguiente;
+                delete temp;
+                actual = primero; // Advance to the next node
+            }
+            else if (actual->siguiente != NULL)
+            {
+                if (actual->siguiente->newsTitle == newsTitle)
+                {
+                    nodeList temp = actual->siguiente;
+                    cout << "--------------------------------------" << endl;
+                    cout << "Titulo: " << temp->newsTitle << endl;
+                    cout << "Eliminado." << endl << endl;
+                    actual->siguiente = actual->siguiente->siguiente;
+                    if (actual->siguiente != NULL) // Check if it's not the last node
+                    {
+                        actual->siguiente->anterior = actual;
+                    }
+                    delete temp;
+                }
+                else
+                {
+                    actual = actual->siguiente; // Advance to the next node
+                }
+            }
+            else if (actual->siguiente == NULL && actual->newsTitle == newsTitle)
+            {
+                delete actual;
+                actual = NULL; // Set to NULL to exit the loop
             }
             else
-                if(actual->siguiente == NULL)
-                    delete actual;    
-
-            actual = actual->siguiente;           
+            {
+                //cout << "No match." << endl;
+                actual = NULL; // Set to NULL to exit the loop
+            }
         }
     }
-    cout << "No match." << endl;
 }
 
 void linkedList::deleteByPosition(int position)
 {
     if (isEmpty())
     {
-        cout << "La lista se encuentra vacia." << endl;
+        cout << "La lista se encuentra vacia." << endl << endl;
     }
     else
     {
         if (position > listLength())
         {
-            cout << "Posicion no existe." << endl;
+            cout << "Posicion " << position << " no existe." << endl << endl;
         }
         else
         {
             if(position <=1)
             {
                 nodeList temp = primero;
+                cout << "--------------------------------------" << endl;
                 cout << "Titulo: " << primero->newsTitle << endl;
                 cout << "Eliminado." << endl;
                 primero = primero->siguiente;
@@ -259,25 +318,27 @@ void linkedList::deleteByPosition(int position)
                     aux = aux->siguiente;
                     posActual++;
                 }
+                cout << "--------------------------------------" << endl;
                 cout << "Titulo: " << aux->newsTitle << endl;
-                cout << "Eliminado." << endl;
+                cout << "Eliminado." << endl << endl;
                 aux->siguiente->anterior = aux->anterior;
                 aux->anterior->siguiente = aux->siguiente;
                 delete aux;
             }
         }
     }
-    cout << "No match." << endl;
 }
 
 void linkedList::print()
 {
     nodeList aux = primero;
 
+    int cont = 1;
     while(aux != NULL)
     {
-        cout << "Titulo: " << aux->newsTitle << endl;
+        cout << cont << " .Titulo: " << aux->newsTitle << endl;
         aux = aux->siguiente;
+        cont++;
     }
     cout << endl;
 }
@@ -299,10 +360,12 @@ void linkedList::printTopFive()
     else
     {
         int i = 0;
+        cout << "\t\tTOP FIVE" << endl;
         while(i < 5)
         {
-            cout << "Titulo: " << aux->newsTitle << endl;
+            cout << (i + 1) << " .Titulo: " << aux->newsTitle << endl;
             aux = aux->siguiente;
+            i++;
         }
         cout << endl;
     }

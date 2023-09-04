@@ -7,9 +7,9 @@ using namespace std;
 class node 
 {
 	public:
-		node(string newsTitle)
+		node(string nTitle)
 		{
-		newsTitle = newsTitle;
+		newsTitle = nTitle;
 		siguiente = NULL;
 		anterior = NULL;
 		}
