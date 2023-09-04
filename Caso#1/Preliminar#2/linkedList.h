@@ -1,0 +1,36 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+#include <iostream>
+#include <string>
+#include "node.h"
+
+using namespace std;
+
+class linkedList
+{
+	public:
+		linkedList();
+
+        bool isEmpty();
+        int listLength();
+
+        void addToStart(string newsTitle);
+        void addToEnd(string newsTitle);
+        void insert(string newsTitle, int pos);
+
+        node* findByWord(string newsTitle);
+        node* findByPosition(int position);
+        int findPositionOf(string newsTitle);
+
+        void deleteByTitle(string newsTitle);
+        void deleteByPosition(int position);
+
+        void print();
+		void printTopFive();
+
+	private:
+		nodeList primero;
+		nodeList actual;
+};
+
+#endif
