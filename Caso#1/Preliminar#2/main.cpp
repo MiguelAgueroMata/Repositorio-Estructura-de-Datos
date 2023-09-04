@@ -19,26 +19,29 @@ int main()
     testing.addToStart("cuarto");
     testing.print();
 
-    testing.findByWord("primero");
+    /*testing.findByWord("primero");
     testing.findByWord("posicion");
     testing.findByWord("Eliminar");
     testing.findByPosition(6);
     testing.findByPosition(1);
-    testing.findPositionOf("Premier One Piece Live Action");
+    testing.findPositionOf("Premier One Piece Live Action");*/
 
-    testing .deleteByPosition(2);
-    testing .deleteByPosition(15);
+    //testing .deleteByPosition(2);
+    //testing .deleteByPosition(15);
 
+
+    //testing.print();
+
+    //testing.deleteByTitle("posicion");
+    //testing.deleteByTitle("primero");
+    //testing.deleteByTitle("prifgasdgasg");
 
     testing.print();
 
-    testing.deleteByTitle("posicion");
-    testing.deleteByTitle("primero");
-    testing.deleteByTitle("prifgasdgasg");
+    testing.relocate("segundo", -1);
 
     testing.print();
-
-    testing.printTopFive();
+    //testing.printTopFive();
 
     cin.get();
     return 0;
