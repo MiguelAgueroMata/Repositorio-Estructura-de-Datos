@@ -1,5 +1,9 @@
+all:
 caso1:
 	g++ main.cpp linkedList.cpp -o caso1.o
+
+comm_progs:
+	g++ -o news.o news.cpp -lcurl
 
 #all: comm_progs
 

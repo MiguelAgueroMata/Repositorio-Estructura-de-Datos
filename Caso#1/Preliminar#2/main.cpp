@@ -1,23 +1,24 @@
 #include <iostream>
 #include <string>
 #include "linkedList.h"
-#include "news.cpp"
+//#include "news.cpp"
 
 
 int main()
 {
     linkedList testing;
 
+    testing.addToStart("cuarto");
+    testing.addToStart("tercero");
+    testing.addToStart("Segundo");
+    testing.addToStart("primero");
     testing.addToEnd("Goku vs Vegeta");
     testing.addToEnd("Bitcoin cae por debajo de $25000");
     testing.addToEnd("Premier One Piece Live Action");
     testing.addToEnd("Eliminar");
     testing.addToEnd("God Irene se casa conmigo");
-    testing.addToStart("primero");
     testing.insert("posicion", 14);
-    testing.addToStart("segundo");
-    testing.addToStart("tercero");
-    testing.addToStart("cuarto");
+   
 
 
     /*testing.findByWord("primero");
@@ -39,7 +40,7 @@ int main()
 
     testing.print();
 
-    testing.relocate("segundo", 4);
+    testing.relocate("Segundo", 4);
 
     testing.print();
     //testing.printTopFive();
