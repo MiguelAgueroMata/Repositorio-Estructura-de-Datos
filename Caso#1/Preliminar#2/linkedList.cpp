@@ -374,7 +374,8 @@ void linkedList::printTopFive()
 void linkedList::relocate(string newsTitle, int movement)
 {
     int location = findPositionOf(newsTitle);
-    if (location = 0)
+
+    if (location == 0)
     {
         cout << "No se encuentra la noticia." << endl;
     }
@@ -382,16 +383,29 @@ void linkedList::relocate(string newsTitle, int movement)
     {
         if (movement > 0)
         {
-            location = location + movement;
-            deleteByTitle(newsTitle);
-            insert(newsTitle, location);
-            
+            if ((location + movement) > listLength())
+            {
+                addToEnd(newsTitle);
+            }
+            else
+            {
+                location += movement;
+                deleteByTitle(newsTitle);
+                insert(newsTitle, location);
+            }     
         }
         else
         {
-            location = location - movement;
+            if ((location - movement) < 0)
+            {
+                addToStart(newsTitle);
+            }
+            else
+            {
+            location += movement;
             deleteByTitle(newsTitle);
             insert(newsTitle, location);
+            }
         }
     }
             

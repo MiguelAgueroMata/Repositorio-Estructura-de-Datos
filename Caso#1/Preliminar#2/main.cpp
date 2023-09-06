@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "linkedList.h"
+#include "news.cpp"
 
 
 int main()
@@ -17,7 +18,7 @@ int main()
     testing.addToStart("segundo");
     testing.addToStart("tercero");
     testing.addToStart("cuarto");
-    testing.print();
+
 
     /*testing.findByWord("primero");
     testing.findByWord("posicion");
@@ -38,7 +39,7 @@ int main()
 
     testing.print();
 
-    testing.relocate("segundo", -1);
+    testing.relocate("segundo", 4);
 
     testing.print();
     //testing.printTopFive();
