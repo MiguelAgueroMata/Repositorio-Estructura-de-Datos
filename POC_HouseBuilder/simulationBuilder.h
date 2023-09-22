@@ -1,10 +1,16 @@
 #include <iostream>
 #include <string>
 #include "buildingStructures.h"
+#include "stack.h"
 
 using namespace std;
 
-void runSimulation()
+Stack pilaPrueba;
+
+
+void buildHouse(int numRooms, bool balcony, int nFloors)
 {
+    Wall houseWall;
+
     
 }
