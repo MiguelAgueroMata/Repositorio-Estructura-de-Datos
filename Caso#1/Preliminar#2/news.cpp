@@ -132,7 +132,7 @@ public:
         return result;
     };
 };
-
+/*
 int main(void)
 {
     Newsapi newsapi;
@@ -142,3 +142,4 @@ int main(void)
 
     return 0;
 }
+*/
